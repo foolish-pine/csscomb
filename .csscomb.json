@@ -193,6 +193,8 @@
     "page-break-inside",
     "widows",
     "orphans",
+    "text-size-adjust",
+    "scroll-behavior",
     "user-select",
     "nav-index",
     "nav-up",

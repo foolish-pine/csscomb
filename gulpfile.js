@@ -93,7 +93,7 @@ function cleanImage() {
 function server(done) {
   browserSync.init({
     server: {
-      baseDir: "dist/html",
+      baseDir: "dist",
     },
   });
   done();
@@ -107,14 +107,13 @@ function bsReload(done) {
 function watch(done) {
   gulp.watch(
     ["src/scss/*", "src/scss/**/*"],
-    series(scsscombInit, scsscomb, cssTranspile, bsReload)
+    series(scsscombInit, scsscomb, cssTranspile)
   );
-  gulp.watch(["src/js/*", "src/js/**/*"], series(jsTranspile, bsReload));
-  gulp.watch(["src/img/*", "src/img/**/*"], series(imageMinify, bsReload));
-  gulp.watch(["dist/html/*"], bsReload);
+  gulp.watch(["src/js/*", "src/js/**/*"], series(jsTranspile));
+  gulp.watch(["src/img/*", "src/img/**/*"], series(imageMinify));
+  gulp.watch(["dist/*.html", "dist/html/*"], bsReload);
   done();
 }
 
 exports.default = gulp.parallel(server, watch);
 exports.imagemin = gulp.series(cleanImage, imageMinify);
-exports.scsscomb = gulp.series(scsscombInit, scsscomb);
